@@ -61,6 +61,4 @@ def main():
                     print("  -", tag.value_string)
 
 if __name__ == "__main__":
-    main()​
-Sri Mulyanidewi​
-
+    main()​​

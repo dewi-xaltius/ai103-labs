@@ -50,11 +50,11 @@ def main():
             asyncio.run(assistant.start())
         except KeyboardInterrupt:
             # Exit if the user enters CTRL+C
-            print("\nðŸ‘‹ Goodbye!")
+            print("\n👋 Goodbye!")
 
 
     except Exception as e:
-        print(f"âŒ An error occurred: {e}")
+        print(f"❌ An error occurred: {e}")
 
 
 # VoiceAssistant class - main coordinator for the voice agent
@@ -82,7 +82,7 @@ class VoiceAssistant:
     async def start(self):
         """Start the voice assistant."""
         print("\n" + "=" * 60)
-        print("ðŸŽ™ï¸  AZURE VOICELIVE VOICE AGENT")
+        print("🎙️  AZURE VOICELIVE VOICE AGENT")
         print("=" * 60)
         
         # Add your code in this try block!
@@ -108,7 +108,7 @@ class VoiceAssistant:
                 # STEP 4: Start audio systems
                 self.audio_processor.start_playback()
 
-                print("\nâœ… Ready! Start speaking...")
+                print("\n✅ Ready! Start speaking...")
                 print("Press Ctrl+C to exit\n")
                 
                 
@@ -143,7 +143,7 @@ class VoiceAssistant:
         )
         
         await self.connection.session.update(session=session_config)
-        print("âš™ï¸  Session configured")
+        print("⚙️  Session configured")
     
     async def process_events(self):
         """Process events from the VoiceLive service."""
@@ -157,25 +157,25 @@ class VoiceAssistant:
         
         # Session is ready - start capturing audio
         if event.type == ServerEventType.SESSION_UPDATED:
-            print(f"ðŸ“¡ Connected to agent: {event.session.agent.name}")
+            print(f"📡 Connected to agent: {event.session.agent.name}")
             self.audio_processor.start_capture()
         
         # User speech was transcribed
         elif event.type == ServerEventType.CONVERSATION_ITEM_INPUT_AUDIO_TRANSCRIPTION_COMPLETED:
-            print(f'ðŸ‘¤ You: {event.get("transcript", "")}')
+            print(f'👤 You: {event.get("transcript", "")}')
         
         # Agent is responding with audio transcript
         elif event.type == ServerEventType.RESPONSE_AUDIO_TRANSCRIPT_DONE:
-            print(f'ðŸ¤– Agent: {event.get("transcript", "")}')
+            print(f'🤖 Agent:  {event.get("transcript", "")}')
         
         # User started speaking (interrupt any playing audio)
         elif event.type == ServerEventType.INPUT_AUDIO_BUFFER_SPEECH_STARTED:
             self.audio_processor.clear_playback_queue()
-            print("ðŸŽ¤ Listening...")
+            print("🎤 Listening...")
         
         # User stopped speaking
         elif event.type == ServerEventType.INPUT_AUDIO_BUFFER_SPEECH_STOPPED:
-            print("ðŸ¤” Thinking...")
+            print("🤔 Thinking...")
         
         # Receiving audio response chunks
         elif event.type == ServerEventType.RESPONSE_AUDIO_DELTA:
@@ -183,11 +183,11 @@ class VoiceAssistant:
         
         # Audio response complete
         elif event.type == ServerEventType.RESPONSE_AUDIO_DONE:
-            print("âœ“ Response complete\n")
+            print("✓ Response complete\n")
         
         # Handle errors
         elif event.type == ServerEventType.ERROR:
-            print(f"âŒ Error: {event.error.message}")
+            print(f"❌ Error:  {event.error.message}")
 
 
 # AudioProcessor class - handles microphone input and speaker output using PyAudio
@@ -238,7 +238,7 @@ class AudioProcessor:
             frames_per_buffer=self.chunk_size,
             stream_callback=capture_callback
         )
-        print("ðŸŽ¤ Microphone started")
+        print("🎤 Microphone started")
     
     def start_playback(self):
         """Start audio playback system."""
@@ -280,7 +280,7 @@ class AudioProcessor:
             frames_per_buffer=self.chunk_size,
             stream_callback=playback_callback
         )
-        print("ðŸ”Š Speakers ready")
+        print("🔊 Speakers ready")
     
     def queue_audio(self, audio_data):
         """Add audio data to the playback queue."""
@@ -306,7 +306,7 @@ class AudioProcessor:
             self.output_stream.close()
         
         self.audio.terminate()
-        print("ðŸ”‡ Audio stopped")
+        print("🔇 Audio stopped")
 
 
 

@@ -18,7 +18,7 @@ def main():
         load_dotenv()
         endpoint = os.getenv("MODEL_ENDPOINT")
         model_deployment = os.getenv("MODEL_NAME")
-        file_path = Path(__file__).parent / "speech.wav"
+        file_path = Path(__file__).parent / "speech_sample.mp3"
         
         # Play the speech file
         playsound(file_path)

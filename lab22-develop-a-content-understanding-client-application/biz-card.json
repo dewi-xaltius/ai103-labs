@@ -2,7 +2,7 @@
     "description": "Business card analyzer",
     "baseAnalyzerId": "prebuilt-document",
     "models": {
-        "completion": "gpt-5.2",
+        "completion": "gpt-5",
         "embedding": "text-embedding-3-large"
     },
     "config": {
